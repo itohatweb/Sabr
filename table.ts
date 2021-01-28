@@ -212,8 +212,13 @@ export class SabrTable<T> {
 
   /** Deletes a document from the table. */
   async delete(id: string) {
-    console.log(`${this.sabr.directoryPath}${this.name}/${id}.json`)
-    await Deno.remove(`${this.sabr.directoryPath}${this.name}/${id}.json`);
+    try {
+      await Deno.remove(`${this.sabr.directoryPath}${this.name}/${id}.json`);
+    } catch (error) {
+      this.sabr.error(
+        `[Sabr Error: delete]: Unable to delete file ${this.sabr.directoryPath}${this.name}/${id}.json`
+      )
+    }
   }
 
   /** Deletes one document in a table that match a filter */
