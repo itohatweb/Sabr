@@ -212,6 +212,7 @@ export class SabrTable<T> {
 
   /** Deletes a document from the table. */
   async delete(id: string) {
+    console.log(`${this.sabr.directoryPath}${this.name}/${id}.json`)
     await Deno.remove(`${this.sabr.directoryPath}${this.name}/${id}.json`);
   }
 
